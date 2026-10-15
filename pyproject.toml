@@ -1,0 +1,9 @@
+[project]
+name = "kv-attention-lab"
+version = "0.1.0"
+description = "C++ KV block allocation and reproducible PyTorch causal attention experiments"
+requires-python = ">=3.10"
+dependencies = ["torch==2.8.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
