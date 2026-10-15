@@ -1,0 +1,20 @@
+name: checks
+on: [push, pull_request]
+jobs:
+  cpu-correctness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: pip install torch==2.8.0 --index-url https://download.pytorch.org/whl/cpu
+      - run: pip install -r requirements.txt
+      - run: make test all
+      - run: python -m pytest -q
+      - name: Reproduce short benchmark and simulation
+        run: |
+          python -m kv_attention_lab.benchmark --warmup 1 --repeats 2 --prompt 32 --steps 4 --output /tmp/cpu.json
+          ./build/simulate --requests 16 > /tmp/paging.json
+          python -c "import json; [json.load(open(p)) for p in ['/tmp/cpu.json', '/tmp/paging.json']]"
