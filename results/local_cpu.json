@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "kind": "tiny_random_model_correctness_and_local_timing",
+  "measured_at_utc": "2026-10-15T17:25:06.475886+00:00",
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit",
+    "machine": "arm64",
+    "processor": "arm",
+    "python": "3.11.14",
+    "torch": "2.8.0",
+    "device": "cpu",
+    "dtype": "float32",
+    "intraop_threads": 1,
+    "interop_threads": 1,
+    "cuda_available": false,
+    "mps_available": true
+  },
+  "config": {
+    "seed": 42,
+    "prompt_tokens": 128,
+    "decode_steps": 24,
+    "batch": 1,
+    "warmup": 5,
+    "repeats": 20,
+    "model": {
+      "vocab_size": 256,
+      "width": 128,
+      "heads": 4,
+      "layers": 2,
+      "max_sequence": 512
+    }
+  },
+  "timing_scope": "Each decode sample includes prefill, all decode steps, logits, and cache allocation when cached. Fixed teacher-forced tokens; no sampling, model downloads, batching, or serving scheduler. SDPA selects its local backend; no GPU backend inference is made from its name.",
+  "correctness": {
+    "manual": {
+      "cache_vs_full_max_abs_error": 7.152557373046875e-07,
+      "vs_manual_full_max_abs_error": 0.0,
+      "atol": 3e-06,
+      "rtol": 3e-05,
+      "status": "passed"
+    },
+    "sdpa": {
+      "cache_vs_full_max_abs_error": 8.344650268554688e-07,
+      "vs_manual_full_max_abs_error": 4.76837158203125e-07,
+      "atol": 3e-06,
+      "rtol": 3e-05,
+      "status": "passed"
+    }
+  },
+  "decode_timing": {
+    "manual": {
+      "full_recomputation": {
+        "median_ms": 19.125854,
+        "p95_ms": 19.213959,
+        "samples_ms": [
+          19.17825,
+          18.970083,
+          18.994583,
+          19.1785,
+          19.161458,
+          19.134875,
+          19.116833,
+          19.24925,
+          19.071417,
+          19.097959,
+          19.046958,
+          19.213959,
+          19.199834,
+          19.047417,
+          19.027083,
+          18.922667,
+          19.164959,
+          19.055833,
+          19.201292,
+          19.205875
+        ]
+      },
+      "preallocated_kv_cache": {
+        "median_ms": 3.7307295,
+        "p95_ms": 3.825542,
+        "samples_ms": [
+          3.702291,
+          3.691375,
+          3.766875,
+          3.799209,
+          3.788083,
+          3.736833,
+          3.704125,
+          3.762709,
+          3.702833,
+          3.677042,
+          3.698333,
+          3.680666,
+          3.777166,
+          3.734542,
+          3.72025,
+          3.8705,
+          3.825542,
+          3.764625,
+          3.726917,
+          3.680292
+        ]
+      },
+      "full_median_divided_by_cached_median": 5.126572162361276
+    },
+    "sdpa": {
+      "full_recomputation": {
+        "median_ms": 18.385708,
+        "p95_ms": 18.6495,
+        "samples_ms": [
+          18.332583,
+          18.405292,
+          18.312083,
+          19.015417,
+          18.492542,
+          18.544,
+          18.43925,
+          18.378041,
+          18.6495,
+          18.358584,
+          18.495459,
+          18.391791,
+          18.5205,
+          18.285958,
+          18.359166,
+          18.414875,
+          18.359,
+          18.379625,
+          18.299833,
+          18.3675
+        ]
+      },
+      "preallocated_kv_cache": {
+        "median_ms": 3.2479375,
+        "p95_ms": 3.320125,
+        "samples_ms": [
+          3.281917,
+          3.320125,
+          3.230875,
+          3.199041,
+          3.24825,
+          3.221125,
+          3.233083,
+          3.286084,
+          3.267166,
+          3.2365,
+          3.305166,
+          3.290917,
+          3.321333,
+          3.28225,
+          3.239167,
+          3.243917,
+          3.287209,
+          3.203292,
+          3.23875,
+          3.247625
+        ]
+      },
+      "full_median_divided_by_cached_median": 5.660733311524622
+    }
+  },
+  "attention_operator_timing": {
+    "prefill": {
+      "shape_b_h_l_s_d": [
+        1,
+        4,
+        128,
+        128,
+        32
+      ],
+      "max_abs_error": 4.172325134277344e-07,
+      "manual": {
+        "median_ms": 0.122,
+        "p95_ms": 0.139875,
+        "samples_ms": [
+          0.122292,
+          0.131209,
+          0.122167,
+          0.12175,
+          0.121833,
+          0.121458,
+          0.122,
+          0.122,
+          0.1215,
+          0.121583,
+          0.121042,
+          0.121334,
+          0.121459,
+          0.127417,
+          0.143083,
+          0.125375,
+          0.135792,
+          0.139875,
+          0.130875,
+          0.121583
+        ]
+      },
+      "sdpa": {
+        "median_ms": 0.1146255,
+        "p95_ms": 0.115208,
+        "samples_ms": [
+          0.115208,
+          0.110792,
+          0.114917,
+          0.114709,
+          0.115083,
+          0.110625,
+          0.114542,
+          0.114208,
+          0.114958,
+          0.109917,
+          0.114791,
+          0.114709,
+          0.114958,
+          0.110208,
+          0.114167,
+          0.127875,
+          0.11475,
+          0.1145,
+          0.114458,
+          0.111667
+        ]
+      }
+    },
+    "one_token_decode": {
+      "shape_b_h_l_s_d": [
+        1,
+        4,
+        1,
+        151,
+        32
+      ],
+      "max_abs_error": 8.940696716308594e-08,
+      "manual": {
+        "median_ms": 0.0221455,
+        "p95_ms": 0.028667,
+        "samples_ms": [
+          0.023084,
+          0.022333,
+          0.021042,
+          0.02225,
+          0.021209,
+          0.022166,
+          0.020959,
+          0.022125,
+          0.032667,
+          0.021834,
+          0.021875,
+          0.021042,
+          0.021875,
+          0.021167,
+          0.021917,
+          0.026959,
+          0.022167,
+          0.028667,
+          0.027083,
+          0.02225
+        ]
+      },
+      "sdpa": {
+        "median_ms": 0.014125,
+        "p95_ms": 0.014583,
+        "samples_ms": [
+          0.014583,
+          0.013792,
+          0.014417,
+          0.012958,
+          0.014125,
+          0.014292,
+          0.012959,
+          0.014125,
+          0.014292,
+          0.012875,
+          0.014084,
+          0.01425,
+          0.012916,
+          0.014125,
+          0.01425,
+          0.012791,
+          0.014125,
+          0.014291,
+          0.012875,
+          0.023916
+        ]
+      }
+    }
+  },
+  "kv_memory": {
+    "capacity_tokens": 152,
+    "kv_tensor_payload_bytes": 311296,
+    "formula_bytes": 311296,
+    "formula": "2 * layers * batch * kv_heads * capacity * head_dim * dtype_bytes",
+    "note": "Tensor element payload, validated by numel * element_size; excludes allocator metadata, model weights, temporary activations and process RSS. Dense tensor cache is separate from the C++ paged allocator."
+  },
+  "forced_flash_attention_probe": {
+    "status": "skipped",
+    "reason": "CUDA unavailable; CPU/MPS SDPA is not a FlashAttention GPU result."
+  }
+}

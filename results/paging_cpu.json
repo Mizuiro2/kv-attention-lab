@@ -1,0 +1,12 @@
+{
+  "schema_version": 1,
+  "kind": "cpu_control_plane_simulation",
+  "environment": {"compiler": "Apple LLVM 21.0.0 (clang-2100.3.34.2)", "hardware_threads": 15},
+  "config": {"seed": 42, "requests": 256, "block_size": 16, "common_prefix_tokens": 30, "max_sequence_tokens": 128, "arrivals_per_tick": 3, "pool_blocks": 4096},
+  "measurement_note": "Capacity is assigned token slots, not pool preallocation or measured process RAM. Timings include bookkeeping and occupancy scans; no GPU/inference speed claim.",
+  "results": [
+    {"mode": "contiguous_reserved", "ticks": 115, "peak_active_requests": 66, "peak_allocated_token_capacity": 8448, "peak_request_logical_tokens": 5022, "mean_allocated_token_capacity": 5816.765217, "physical_occupancy_ratio": 0.578415, "request_logical_tokens_per_allocated_slot": 0.578415, "mean_capacity_reduction_vs_reserved": 0.000000, "block_or_reservation_allocations": 256, "block_or_reservation_frees": 256, "copy_on_write_operations": 0, "copied_token_markers": 0, "simulation_elapsed_ms": 0.045125},
+    {"mode": "paged_private", "ticks": 115, "peak_active_requests": 66, "peak_allocated_token_capacity": 5568, "peak_request_logical_tokens": 5022, "mean_allocated_token_capacity": 3704.904348, "physical_occupancy_ratio": 0.908122, "request_logical_tokens_per_allocated_slot": 0.908122, "mean_capacity_reduction_vs_reserved": 0.363064, "block_or_reservation_allocations": 1456, "block_or_reservation_frees": 1456, "copy_on_write_operations": 0, "copied_token_markers": 0, "simulation_elapsed_ms": 0.865834},
+    {"mode": "paged_shared_prefix", "ticks": 115, "peak_active_requests": 66, "peak_allocated_token_capacity": 4560, "peak_request_logical_tokens": 5022, "mean_allocated_token_capacity": 3008.973913, "physical_occupancy_ratio": 0.886242, "request_logical_tokens_per_allocated_slot": 1.118157, "mean_capacity_reduction_vs_reserved": 0.482707, "block_or_reservation_allocations": 1202, "block_or_reservation_frees": 1202, "copy_on_write_operations": 256, "copied_token_markers": 3584, "simulation_elapsed_ms": 0.867542}
+  ]
+}
